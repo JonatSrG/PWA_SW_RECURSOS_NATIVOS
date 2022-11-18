@@ -30,7 +30,7 @@ if ( navigator.serviceWorker ) {
 
 
 // Referencias de jQuery
-var googleMapKey = 'AIzaSyA5mjCwx1TRLuBAjwQw84WE6h5ErSe7Uj8';
+var googleMapKey = 'AIzaSyAZ7zantyAHnuNFtheMlJY1VvkRBEjvw9Y';
 
 // Google Maps llaves alternativas - desarrollo
 // AIzaSyDyJPPlnIMOLp20Ef1LlTong8rYdTnaTXM
@@ -481,7 +481,19 @@ function mostrarMapaModal(lat, lng) {
 // Obtener la geolocalización
 btnLocation.on('click', () => {
 
-    console.log('Botón geolocalización');
+    //console.log('Botón geolocalización');
+    $.mdtoast('Cargando mapa...', {
+        interaction: true,
+        interactionTimeout: 2000,
+        actionText: 'OK!'
+    });
+
+    navigator.geolocation.getCurrentPosition( pos => {
+
+        console.log( pos );
+        mostrarModela( pos.coords.latitude, pos.coords.longitude );
+
+    });
     
 
 });
