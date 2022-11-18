@@ -80,7 +80,7 @@ var usuario;
 
 // ===== Codigo de la aplicación
 
-function crearMensajeHTML(mensaje, personaje, lat, lng, foto) {
+function crearMensajeHTML(mensaje, personaje, lat, lng) {
 
     // console.log(mensaje, personaje, lat, lng);
 
@@ -260,10 +260,10 @@ postBtn.on('click', function() {
     .then( res => console.log( 'app.js', res ))
     .catch( err => console.log( 'app.js error:', err ));
 
-    camera.apagar();
-    contenedorCamara.addClass('oculto');
+    //camera.apagar();
+    //contenedorCamara.addClass('oculto');
 
-    crearMensajeHTML( mensaje, usuario, lat, lng, foto );
+    crearMensajeHTML( mensaje, usuario, lat, lng );
     
     foto = null;
 });
@@ -277,7 +277,8 @@ function getMensajes() {
         .then( res => res.json() )
         .then( posts => {
 
-
+            console.log(posts);
+            
             posts.forEach( post => 
                 crearMensajeHTML( post.mensaje, post.user, post.lat, post.lng, post.foto ));
         });
@@ -491,8 +492,10 @@ btnLocation.on('click', () => {
     navigator.geolocation.getCurrentPosition( pos => {
 
         console.log( pos );
-        mostrarModela( pos.coords.latitude, pos.coords.longitude );
+        mostrarMapaModal( pos.coords.latitude, pos.coords.longitude );
 
+        lat = pos.coords.latitude;
+        lng = pos.coords.longitude;
     });
     
 
